@@ -3,7 +3,7 @@ import face_recognition
 from PIL import Image, ImageDraw
 import numpy
 
-jewel_img = cv2.imread("chainn.png")
+jewel_img = cv2.imread("jewelery.png")
 frame = cv2.imread('priyanka.jpeg')
 frame = cv2.resize(frame,(432,576))
 
@@ -23,6 +23,7 @@ jewel_img = cv2.resize(jewel_img, (img_width,img_height), interpolation=cv2.INTE
 jewel_gray = cv2.cvtColor(jewel_img, cv2.COLOR_BGR2GRAY)
 # All pixels greater than 230 will be converted to white and others will be converted to black
 thresh, jewel_mask = cv2.threshold(jewel_gray, 230, 255, cv2.THRESH_BINARY)
+#cv2.imshow("jewel_mask",jewel_mask)
 # Convert to black the background of jewelry image
 jewel_img[jewel_mask == 255] = 0
 # Crop out jewelry area from original frame
@@ -38,12 +39,30 @@ rgb_img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 pil_img = Image.fromarray(rgb_img)
 draw = ImageDraw.Draw(pil_img, 'RGBA')
 
-draw.polygon(face_landmarks['left_eyebrow'], fill=(23, 26, 31, 100))
-draw.polygon(face_landmarks['right_eyebrow'], fill=(23, 26, 31, 100))
-draw.polygon(face_landmarks['top_lip'], fill=(158, 63, 136, 100))
-draw.polygon(face_landmarks['bottom_lip'], fill=(158, 63, 136, 100))
-draw.polygon(face_landmarks['left_eye'], fill=(23, 26, 31, 100))
-draw.polygon(face_landmarks['right_eye'], fill=(23, 26, 31, 100))
+color=str(input("enter priyanka's lip color, your options are red,green,purple"))
+if color== "red":
+    draw.polygon(face_landmarks['left_eyebrow'], fill=(23, 26, 31, 100))
+    draw.polygon(face_landmarks['right_eyebrow'], fill=(23, 26, 31, 100))
+    draw.polygon(face_landmarks['top_lip'], fill=(222, 4, 4, 100))
+    draw.polygon(face_landmarks['bottom_lip'], fill=(222, 4, 4, 100))
+    draw.polygon(face_landmarks['left_eye'], fill=(23, 26, 31, 100))
+    draw.polygon(face_landmarks['right_eye'], fill=(23, 26, 31, 100))
+
+elif color== "green":
+    draw.polygon(face_landmarks['left_eyebrow'], fill=(23, 26, 31, 100))
+    draw.polygon(face_landmarks['right_eyebrow'], fill=(23, 26, 31, 100))
+    draw.polygon(face_landmarks['top_lip'], fill=(54, 148, 0, 100))
+    draw.polygon(face_landmarks['bottom_lip'], fill=(54, 148, 0, 100))
+    draw.polygon(face_landmarks['left_eye'], fill=(23, 26, 31, 100))
+    draw.polygon(face_landmarks['right_eye'], fill=(23, 26, 31, 100))
+
+elif color== "purple":
+    draw.polygon(face_landmarks['left_eyebrow'], fill=(23, 26, 31, 100))
+    draw.polygon(face_landmarks['right_eyebrow'], fill=(23, 26, 31, 100))
+    draw.polygon(face_landmarks['top_lip'], fill=(128, 0, 148, 100))
+    draw.polygon(face_landmarks['bottom_lip'], fill=(128, 0, 148, 100))
+    draw.polygon(face_landmarks['left_eye'], fill=(23, 26, 31, 100))
+    draw.polygon(face_landmarks['right_eye'], fill=(23, 26, 31, 100))
 # calculate x, y, radius for ellipse to be drawn between two eyebrows
 x_centre_eyebrow = face_landmarks['nose_bridge'][0][0]
 y_centre_eyebrow = face_landmarks['left_eyebrow'][4][1]
