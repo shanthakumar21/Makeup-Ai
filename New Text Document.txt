@@ -1,0 +1,2 @@
+The main.py file is the makeup AI script. The scripts adds makeup to the demo image(priyanka chopra). 
+The AI colors the lips, eyebrows. I also tried to add a jewerlery to her. 
